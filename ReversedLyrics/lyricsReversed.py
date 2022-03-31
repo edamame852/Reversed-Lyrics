@@ -16,9 +16,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Calling en variables
+
 import os
 api_key = os.getenv("API_KEY") # API Token (Do not distribute)
 
+#Shows all location of where API_KEY is found
+print(os.getenv("PATH"))
 
 genius = lg.Genius(api_key, skip_non_songs=True, excluded_terms=["(Remix)", "(Live)"], remove_section_headers=True)
 artist = genius.search_artist("Owl City", max_songs=3)
@@ -56,10 +59,9 @@ finalOutput = []
 [finalOutput.append(element[::-1])for idx, element in enumerate(updated_lyrics)]
 
 
-textfile = open("songReversed.txt", "w")
-for element in finalOutput:
-    textfile.write(element)
-textfile.close()
+with open("songReversed.txt", "w") as textfile:
+    for element in finalOutput:
+        textfile.write(element)
 
 
         
